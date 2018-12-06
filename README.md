@@ -23,7 +23,8 @@ The translation of the `GET` has a Mapping Template for `application/json`:
     #end
   },
     "method": "$context.httpMethod"
-}```
+}
+```
 
 The translation of the `POST` has a Mapping Template for `application/json`:
 ```
@@ -36,4 +37,5 @@ The translation of the `POST` has a Mapping Template for `application/json`:
         #if($foreach.hasNext),#end
         #end
     }
-}```
+}
+```
