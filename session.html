@@ -1,0 +1,157 @@
+<html>
+    <head>
+		<!-- Base head -->
+        <!--
+            customer_name=Adam&to_number=+15087696559&product_name=Star%20Wars%20Collectables&product_url=a.co/d/3MQCqlN&body=Hi%20{name},%20We%20think%20you'd%20like%20{product_name}%20{url}%20STOP%20to%20unsub
+        -->
+        <title>Session Demo</title>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="assets/base.css">
+        
+        <script language="javascript">
+        function submitToAPI(e) {
+            $("#response").html("");
+
+            e.preventDefault();
+            var URL = "https://h6h7ve0mtb.execute-api.us-east-1.amazonaws.com/dev";
+
+            var id    = $("#id").val();
+            var value = $("#value").val();
+            var key   = $("#key").val();
+            var data  = {
+                    session_id    : id,
+                    session_data  : value,
+                    key           : key
+                };
+
+            // alert("Ready to send to: "+ to_number +" body: "+ body);
+
+            $.ajax({
+                type: "POST",
+                url : URL,
+                dataType: "json",
+                crossDomain: "true",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+
+                
+                success: function (data) {
+                    console.log(data)
+                    if(data.statusCode == 200) {
+                        alert("Fantastic, response: "+ data.body);
+                    } else {
+                        $("#response").html("Error: "+ data.statusCode +", error: "+ data.body);
+                    }
+
+                    // document.getElementById("contact-form").reset();
+                    // location.reload();
+                },
+                error: function (data) {
+                    $("#response").html("Error: "+ data.body);
+                    // show an error message
+                    alert("Sorry, we had a problem: "+ data.statusCode);
+                }
+            });
+        }
+
+        function getSession(e) {
+            $("#get_response").html("");
+
+            e.preventDefault();
+            var URL = "https://h6h7ve0mtb.execute-api.us-east-1.amazonaws.com/dev";
+
+            var id    = $("#get_id").val();
+            var key   = $("#key").val();
+            var data  = {
+                    session_id    : id,
+                    key           : key
+                };
+
+            // alert("Ready to send to: "+ to_number +" body: "+ body);
+
+            $.ajax({
+                type: "GET",
+                url : URL,
+                crossDomain: "true",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+
+                
+                success: function (data) {
+                    console.log(data)
+                    if(data.statusCode == 200) {
+                        alert("Fantastic, response: "+ data.body);
+                        $("#get_response").html("Response: "+ data.body);
+                    } else {
+                        $("#get_response").html("Error: "+ data.statusCode +", error: "+ data.body);
+                    }
+
+                    // document.getElementById("contact-form").reset();
+                    // location.reload();
+                },
+                error: function (data) {
+                    $("#get_response").html("Error: "+ data.body);
+                    // show an error message
+                    alert("Sorry, we had a problem: "+ data.statusCode);
+                }
+            });
+        }
+        </script>
+    </head>
+
+    <table style="width:100%;margin:40px auto;">
+        <tr>
+            <td>
+                <div style="width:400px; margin: 10px auto;">
+        
+                    <div style="margin:15px auto; width:300;">
+                        Store Sessions!<br>
+                    </div>
+                    <div style="margin:15px auto; width:500; font-family:Arial, Helvetica, sans-serif">
+                        <!-- notes can go here -->
+                    </div>
+                    <form id="sendform" class="signup-form auth-form" >
+                    
+                        <div class="input-element"><label class="input-element__label">Session ID</label><input class="input-element__input" type="text" id="id" placeholder="ID" value=""><span class="input-element__error">&nbsp;</span><div class="input-element__helper"></div></div>
+            
+                        <div class="input-element"><label class="input-element__label">Session Value</label><input class="input-element__input" type="text" id="value" placeholder="value" value=""><span class="input-element__error">&nbsp;</span><div class="input-element__helper"></div></div>
+                    
+                        <input class="" type="hidden" id="key" value="key123">
+            
+                        <span class="select-element__error">&nbsp;</span>    
+                
+                        <button class="button-element button-element--primary signup-form-submit-button" type="button" onClick="submitToAPI(event)" style="margin-top:20px;"><span class="text">Send!</span></button>
+                
+                        <div style="padding:40px" id="response">Any error info will go here</div>
+                    </form>
+                </div> 
+            </td>
+            <td>
+                <div style="width:400px; margin: 10px auto;">
+        
+                    <div style="margin:15px auto; width:300;">
+                        Get Sessions!<br>
+                    </div>
+                    <div style="margin:15px auto; width:500; font-family:Arial, Helvetica, sans-serif">
+                        <!-- notes can go here -->
+                    </div>
+                    <form id="sendform" class="signup-form auth-form" >
+                    
+                        <div class="input-element"><label class="input-element__label">Session ID</label><input class="input-element__input" type="text" id="get_id" placeholder="ID" value=""><span class="input-element__error">&nbsp;</span><div class="input-element__helper"></div></div>
+                                
+                        <input class="" type="hidden" id="key" value="key123">
+            
+                        <span class="select-element__error">&nbsp;</span>    
+                
+                        <button class="button-element button-element--primary signup-form-submit-button" type="button" onClick="getSession(event)" style="margin-top:20px;"><span class="text">GET!</span></button>
+                
+                        <div style="padding:40px" id="get_response">Any error info will go here</div>
+                    </form>
+                </div>  
+            </td>
+        </tr>
+    </table>
+    
+</html>

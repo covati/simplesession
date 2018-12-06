@@ -1,0 +1,15 @@
+{
+  "name": "simple_session",
+  "version": "1.0.0",
+  "description": "a simple app for using sessions with lambda and elasticache",
+  "main": "session.js",
+  "scripts": {
+    "test": "run_session.sh"
+  },
+  "author": "covati",
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {}
+}

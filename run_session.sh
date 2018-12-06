@@ -1,0 +1,1 @@
+lambda-local -l session.js -e session_test.js -E '{"host":"localhost","port":"6379"}'
