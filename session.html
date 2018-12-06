@@ -2,7 +2,7 @@
     <head>
 		<!-- Base head -->
         <!--
-            customer_name=Adam&to_number=+15087696559&product_name=Star%20Wars%20Collectables&product_url=a.co/d/3MQCqlN&body=Hi%20{name},%20We%20think%20you'd%20like%20{product_name}%20{url}%20STOP%20to%20unsub
+            customer_name=Adam&to_number=+19995551212&product_name=Star%20Wars%20Collectables&product_url=a.co/d/3MQCqlN
         -->
         <title>Session Demo</title>
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,7 +14,7 @@
             $("#response").html("");
 
             e.preventDefault();
-            var URL = "https://h6h7ve0mtb.execute-api.us-east-1.amazonaws.com/dev";
+            var URL = $("#gateway_url").val();
 
             var id    = $("#id").val();
             var value = $("#value").val();
@@ -59,7 +59,7 @@
             $("#get_response").html("");
 
             e.preventDefault();
-            var URL = "https://h6h7ve0mtb.execute-api.us-east-1.amazonaws.com/dev";
+            var URL = $("#cache_url").val();
 
             var id    = $("#get_id").val();
             var key   = $("#key").val();
@@ -102,6 +102,13 @@
     </head>
 
     <table style="width:100%;margin:40px auto;">
+        <tr>
+            <td colspan=2>
+                    <div style="width:400px; margin: 10px auto;">
+                        API Gateway Url: <input id=gateway_url type="text">
+                    </div>
+                </td>
+        </tr>
         <tr>
             <td>
                 <div style="width:400px; margin: 10px auto;">
